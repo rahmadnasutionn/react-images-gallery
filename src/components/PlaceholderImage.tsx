@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useImageLoad } from '../lib/hooks';
 
 interface PlaceholderImageType {
