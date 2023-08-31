@@ -5,7 +5,6 @@ import { RootState } from '../redux/store';
 import { 
   getInitialImage, 
   loadMoreImage, 
-  setError, 
   setLoading 
 } from '../redux/imageSlice';
 import useIntersectionObserver from '../lib/hooks';
@@ -75,7 +74,7 @@ function ImageList() {
           dispatch(getInitialImage(data))
         }
       } catch (error) {
-        dispatch(setError());
+        throw error;
       }
     }
 

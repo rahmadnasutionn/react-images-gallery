@@ -41,9 +41,6 @@ const image = createSlice({
       state.isLoading = false;
       state.next_page = null;
     },
-    setError(state) {
-      state = initialState;
-    }
   }
 });
 
@@ -52,7 +49,6 @@ export const {
   setLoading,
   updateQuery,
   loadMoreImage,
-  setError,
 } = image.actions;
 
 export default image.reducer;
