@@ -28,8 +28,8 @@ function SearchForm() {
         <input 
           ref={inputRef}
           type="text"
-          placeholder='search'
-          className='w-full py-1.5 px-3 rounded-lg bg-zinc-100 placeholder:text-gray-800 border border-gray-400 rounded-tr-none rounded-br-none rounded-tl-full rounded-bl-full focus:outline-none'
+          placeholder='Search'
+          className='w-full py-1.5 px-3 rounded-lg bg-zinc-100 placeholder:text-gray-800 border-gray-400 rounded-tr-none rounded-br-none rounded-tl-full rounded-bl-full focus:outline-none'
           value={query}
           onChange={(event) => setQuery(event.target.value)}
         />

@@ -7,7 +7,6 @@ import {
   loadMoreImage, 
   setLoading 
 } from '../redux/imageSlice';
-import useIntersectionObserver from '../lib/hooks';
 import Loading from './Loading';
 import ImageCard from './ImageCard';
 import { PexelResponse, PexelsImage } from '../interfaces';
@@ -26,7 +25,6 @@ async function fetchImages(url: string): Promise<PexelResponse> {
 }
 
 function ImageList() {
-  const [isIntersecting, ref] = useIntersectionObserver<HTMLDivElement>();
   const dispatch = useDispatch();
   const {
     query,
@@ -53,7 +51,7 @@ function ImageList() {
     const scrollTop = 
       window.innerHeight + document.documentElement.scrollTop + 150;
     const isBottom = scrollTop > document.documentElement.offsetHeight;
-    if (isBottom && !isLoading && next_page && isIntersecting) {
+    if (isBottom && !isLoading && next_page) {
       loadMoreImages(next_page);
     }
   };
@@ -62,7 +60,7 @@ function ImageList() {
     window.addEventListener('scroll', handleScroll);
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [next_page, isIntersecting]);
+  }, [next_page]);
 
   React.useEffect(() => {
     const fetchInitialImage = async () => {
@@ -85,15 +83,10 @@ function ImageList() {
     <section className='w-[90vw] grid gap-8 mx-auto pb-20 photos'>
       {photos.length > 0 ? (
         photos.map((photo: PexelsImage) => (
-          <div 
-            key={`key-${photo.id}`} 
-            className="relative overflow-hidden group"
-            ref={ref}
-          >
-            <ImageCard 
-              photo={photo}
-            />
-          </div>
+          <ImageCard
+            key={`key-${photo.id}_yaitu_${photo.alt}`}
+            photo={photo}
+          />
         ))
       ) : (
         <>

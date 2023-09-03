@@ -36,20 +36,41 @@ export function useImageLoad(): ImageLoadType {
   }
 }
 
-export default function useIntersectionObserver<T extends HTMLElement>(): [
-  boolean,
-  React.Ref<T>
-] {
-  const [intersecting, setIntersecting] = React.useState<boolean>(false)
-  const [element, setElement] = React.useState<HTMLElement>()
-  React.useEffect(() => {
-    if (!element) return
-    const observer = new IntersectionObserver((entries) => {
-      setIntersecting(entries[0]?.isIntersecting)
-    })
-    observer.observe(element)
-    return () => observer.unobserve(element)
-  }, [element])
+export function useIntersectionObserver(
+  ref: React.RefObject<Element>,
+  {
+    threshold = 0,
+    root = null,
+    rootMargin = '0%',
+  }: IntersectionObserverInit,
+): IntersectionObserverEntry | undefined {
+  const [entry, setEntry] = React.useState<IntersectionObserverEntry>()
 
-  return [intersecting, (el) => el && setElement(el)]
+  const frozen = entry?.isIntersecting
+
+  const updateEntry = ([entry]: IntersectionObserverEntry[]): void => {
+    setEntry(entry)
+  }
+
+  React.useEffect(() => {
+    const node = ref?.current;
+
+    if (!node || frozen || typeof IntersectionObserver !== 'function') return
+
+    const observerParams = { threshold, root, rootMargin }
+    const observer = new IntersectionObserver(updateEntry, observerParams)
+
+    observer.observe(node)
+
+    return () => observer.disconnect()
+
+  }, [
+    ref?.current,
+    threshold,
+    root,
+    rootMargin,
+    frozen
+  ])
+  
+  return entry
 }
