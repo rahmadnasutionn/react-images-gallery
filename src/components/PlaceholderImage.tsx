@@ -30,7 +30,7 @@ function PlaceholderImage({
             height: '400px'
           }}
           width={'100%'}
-          className={['w-full object-cover h-[400px] rounded', className].join(' ')}
+          className='w-full object-cover h-[400px] rounded'
         />
 
         <img 
@@ -42,7 +42,10 @@ function PlaceholderImage({
           }}
           width={'100%'}
           onLoad={handleImageLoad}
-          className={['w-full object-cover h-[400px] rounded', className].join(' ')}
+          className={[
+            'w-full object-cover h-[400px] rounded', 
+            className,
+          ].join(' ')}
         />
         </>
       ) : (

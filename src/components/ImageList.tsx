@@ -7,7 +7,6 @@ import {
   loadMoreImage, 
   setLoading 
 } from '../redux/imageSlice';
-import Loading from './Loading';
 import ImageCard from './ImageCard';
 import { PexelResponse, PexelsImage } from '../interfaces';
 
@@ -101,7 +100,7 @@ function ImageList() {
 
       {isLoading && (
         <div className="flex w-full mx-auto items-center justify-center">
-          <Loading />
+          <div className="loader" />
         </div>
       )}
 

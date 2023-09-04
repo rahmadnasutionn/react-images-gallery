@@ -10,7 +10,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  per_page: 10,
+  per_page: 8,
   photos: [],
   next_page: null,
   query: 'bali',

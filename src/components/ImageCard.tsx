@@ -10,11 +10,10 @@ function ImageCard({ photo }: { photo: PexelsImage }) {
   return (
     <div 
       className="relative overflow-hidden group"
+      aria-label='Card Image'
       ref={ref}
     >
-      <article 
-        aria-label='Card Image'
-      >
+      <article>
         <PlaceholderImage
           url={photo?.src.large}
           thumbnail={photo?.src.medium}
